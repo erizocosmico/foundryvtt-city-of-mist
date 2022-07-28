@@ -1,0 +1,54 @@
+{
+	"Actor": {
+		"types": [
+			"character",
+			"crew",
+			"danger"
+		],
+		"templates": {},
+		"character": {
+			"bio": ""
+		},
+		"crew": {
+			"desc": ""
+		},
+		"danger": {
+			"description": ""
+		}
+	},
+	"Item": {
+		"types": [
+			"tag",
+			"theme",
+			"status",
+			"move",
+			"spectrum"
+		],
+		"templates": {},
+		"theme": {
+			"kind": "mythos",
+			"type": "",
+			"crack": 0,
+			"attention": 0,
+			"identity": ""
+		},
+		"tag": {
+			"type": "power",
+			"invoked": false,
+			"burned": false,
+			"theme": ""
+		},
+		"status": {
+			"tier": 0,
+			"chips": 0,
+			"duration": "temporary"
+		},
+		"move": {
+			"type": "soft",
+			"description": ""
+		},
+		"spectrum": {
+			"value": 0
+		}
+	}
+}

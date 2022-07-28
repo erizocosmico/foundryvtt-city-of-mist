@@ -1,0 +1,32 @@
+{
+	"name": "city-of-mist",
+	"title": "City of Mist",
+	"description": "System for City of Mist PbtA",
+	"version": "0.1.0",
+	"templateVersion": 2,
+	"compatibleCoreVersion": "9",
+	"minimumCoreVersion": "9.245",
+	"author": "Miguel Molina",
+	"scripts": [],
+	"esmodules": [
+		"module/main.js"
+	],
+	"styles": [
+		"styles/style.css"
+	],
+	"packs": [],
+	"languages": [
+		{
+			"lang": "es",
+			"name": "Español",
+			"path": "lang/es.json"
+		}
+	],
+	"socket": false,
+	"bugs": "https://github.com/erizocosmico/foundryvtt-city-of-mist/issues",
+	"changelog": "https://github.com/erizocosmico/foundryvtt-city-of-mist/releases",
+	"download": "https://github.com/erizocosmico/foundryvtt-city-of-mist/releases/v0.1.0/download/system.zip",
+	"manifest": "https://github.com/erizocosmico/foundryvtt-city-of-mist/releases/v0.1.0/download/system.json",
+	"readme": "https://github.com/erizocosmico/foundryvtt-city-of-mist/blob/main/README.md",
+	"url": "https://github.com/erizocosmico/foundryvtt-city-of-mist"
+}

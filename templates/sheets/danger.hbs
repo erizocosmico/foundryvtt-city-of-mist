@@ -1,0 +1,130 @@
+<form class="{{cssClass}}" autocomplete="off">
+	<header class="header">
+		<img class="profile-img flex-narrow" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="70"
+			width="70" />
+		<input type="text" name="name" class="danger-name" value="{{actor.name}}" placeholder="Nombre" />
+	</header>
+
+	{{#if (isEmpty actor.data.data.description)}}
+	<button class="add-description">Añadir descripción</button>
+	{{else}}
+	<p class="danger-description">{{actor.data.data.description}}</p>
+	{{/if}}
+
+	<div class="spectrums">
+		<header>
+			<h4>Espectros</h4>
+			<button class="add-spectrum"><i class="fas fa-plus-square" title="Añadir espectro"></i></button>
+		</header>
+
+		{{#if (isEmpty actor.spectrums)}}
+		<p>No hay espectros</p>
+		{{else}}
+		<ul>
+			{{#each actor.spectrums as |s idx|}}
+			{{#if (neq idx 0)}}
+			<li class="separator">/</li>
+			{{/if}}
+			<li>
+				<p>{{s.name}} {{s.data.value}}</p>
+				<button class="delete-item" data-id="{{s._id}}" title="Borrar espectro"><i
+						class="fas fa-trash"></i></button>
+			</li>
+			{{/each}}
+		</ul>
+		{{/if}}
+	</div>
+
+	<div class="moves">
+		<div class="move-kind">
+			<header>
+				<h4>Movimientos personalizados</h4>
+				<button class="add-move" data-type="custom"><i class="fas fa-plus-square"
+						title="Añadir movimiento"></i></button>
+			</header>
+
+			{{#if (isEmpty actor.moves.custom)}}
+			<p>No hay movimientos</p>
+			{{else}}
+			<ul>
+				{{#each actor.moves.custom as |m|}}
+				<li>
+					<p><strong>{{m.name}}:</strong> {{safeHTML m.data.description}}</p>
+					<button class="delete-item" data-id="{{m._id}}" title="Borrar movimiento"><i
+							class="fas fa-trash"></i></button>
+				</li>
+				{{/each}}
+			</ul>
+			{{/if}}
+		</div>
+
+		<div class="move-kind">
+			<header>
+				<h4>Movimientos duros</h4>
+				<button class="add-move" data-type="hard"><i class="fas fa-plus-square"
+						title="Añadir movimiento"></i></button>
+			</header>
+
+			{{#if (isEmpty actor.moves.hard)}}
+			<p>No hay movimientos</p>
+			{{else}}
+			<ul>
+				{{#each actor.moves.hard as |m|}}
+				<li>
+					<p>{{safeHTML m.data.description}}</p>
+					<button class="delete-item" data-id="{{m._id}}" title="Borrar movimiento"><i
+							class="fas fa-trash"></i></button>
+				</li>
+				{{/each}}
+			</ul>
+			{{/if}}
+		</div>
+
+		<div class="move-kind">
+			<header>
+				<h4>Movimientos suaves</h4>
+				<button class="add-move" data-type="soft"><i class="fas fa-plus-square"
+						title="Añadir movimiento"></i></button>
+			</header>
+
+			{{#if (isEmpty actor.moves.soft)}}
+			<p>No hay movimientos</p>
+			{{else}}
+			<ul>
+				{{#each actor.moves.soft as |m|}}
+				<li>
+					<p>{{safeHTML m.data.description}}</p>
+					<button class="delete-item" data-id="{{m._id}}" title="Borrar movimiento"><i
+							class="fas fa-trash"></i></button>
+				</li>
+				{{/each}}
+			</ul>
+			{{/if}}
+		</div>
+	</div>
+
+	<div class="statuses">
+		<header>
+			<h4>Estados</h4>
+			<button class="add-status"><i class="fas fa-plus-square" title="Añadir estado"></i></button>
+		</header>
+
+		{{#if (isEmpty actor.statuses)}}
+		<p class="no-statuses">No hay estados</p>
+		{{else}}
+		<ul>
+			{{#each actor.statuses as |s|}}
+			<li class="status">
+				<header>
+					<input type="text" class="status-name" data-id="{{s._id}}" data-prop="name" value="{{s.name}}"
+						placeholder="Estado" />
+					<button class="delete-item" data-id="{{s._id}}" title="Borrar estado"><i
+							class="fas fa-trash"></i></button>
+				</header>
+				{{makeStatusTier s}}
+			</li>
+			{{/each}}
+		</ul>
+		{{/if}}
+	</div>
+</form>

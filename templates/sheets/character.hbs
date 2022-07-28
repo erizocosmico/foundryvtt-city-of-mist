@@ -1,0 +1,173 @@
+<form class="{{cssClass}}" autocomplete="off">
+	<header class="header">
+		<img class="profile-img flex-narrow" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100"
+			width="100" />
+		<input type="text" name="name" class="character-name" value="{{actor.name}}" placeholder="Nombre" />
+	</header>
+	<div class="themes">
+		{{#each actor.themes as |t|}}
+		{{#if t.empty}}
+		<div class="theme theme-placeholder add-theme">
+			<h4>Añadir tema</h4>
+			<i class="icon fas fa-plus-square"></i>
+		</div>
+		{{else}}
+		<div class="theme theme-{{t.data.kind}}">
+			<header>
+				<div class="theme-type-kind">
+					<div class="theme-type edit-item-text-field" data-prop="data.type" data-value="{{t.data.type}}"
+						data-id="{{t._id}}" title="Editar tipo de tema">{{t.data.type}}</div>
+					{{#if (eq t.data.kind "logos")}}
+					<button class="theme-kind-logos theme-kind" data-id="{{t._id}}" data-prop="kind" title="Logos"><i
+							class="fas fa-mask"></i></button>
+					{{else}}
+					<button class="theme-kind-mythos theme-kind" data-id="{{t._id}}" data-prop="kind" title="Mythos"><i
+							class="fas fa-bolt"></i></button>
+					{{/if}}
+					<button class="delete-theme" data-id="{{t._id}}" title="Borrar tema"><i
+							class="fas fa-trash"></i></button>
+				</div>
+				<h3>
+					<div class="theme-name edit-item-text-field" data-prop="name" data-value="{{t.name}}"
+						data-id="{{t._id}}" title="Editar nombre del tema">{{t.name}}</div>
+				</h3>
+			</header>
+
+			<div class="theme-counters">
+				{{makeThemeCounter t "attention" }}
+				{{makeThemeCounter t "crack"}}
+			</div>
+
+			<div class="theme-identity-block">
+				<h4>
+					{{#if (eq t.data.kind "mythos")}}Misterio{{else}}Identidad{{/if}}
+				</h4>
+
+				<div class="theme-identity edit-item-text-field" data-prop="data.identity"
+					data-value="{{t.data.identity}}" data-id="{{t._id}}" title="Editar misterio o identidad">
+					{{t.data.identity}}</div>
+			</div>
+
+			<div class="theme-powers">
+				<header>
+					<h4>Poderes</h4>
+					<button class="add-tag" data-id="{{t._id}}" data-type="power"><i class="fas fa-plus-square"
+							title="Añadir poder"></i></button>
+				</header>
+
+				{{#if (isEmpty t.powers)}}
+				<p class="no-powers">No hay poderes</p>
+				{{else}}
+				<ul>
+					{{#each t.powers as |p|}}
+					<li class="theme-power {{#if p.data.burned}}burned{{/if}}">
+						<div class="tag-name edit-item-text-field" data-prop="name" data-value="{{p.name}}"
+							data-id="{{p._id}}" title="Editar poder">
+							{{p.name}}</div>
+						<button class="tag-burn" data-id="{{p._id}}" data-prop="burned" title="Quemar poder"><i
+								class="fas fa-fire"></i></button>
+						<button class="delete-tag" data-id="{{p._id}}" title="Borrar poder"><i
+								class="fas fa-trash"></i></button>
+					</li>
+					{{/each}}
+				</ul>
+				{{/if}}
+			</div>
+
+			<div class="theme-weaknesses">
+				<header>
+					<h4>Debilidades</h4>
+					<button class="add-tag" data-id="{{t._id}}" data-type="weakness" title="Añadir debilidad"><i
+							class="fas fa-plus-square"></i></button>
+				</header>
+
+				{{#if (isEmpty t.weaknesses)}}
+				<p class="no-powers">No hay debilidades</p>
+				{{else}}
+				<ul>
+					{{#each t.weaknesses as |w|}}
+					<li class="theme-weakness">
+						<div class="tag-name edit-item-text-field" data-prop="name" data-value="{{w.name}}"
+							data-id="{{w._id}}" title="Editar debilidad">
+							{{w.name}}</div>
+						<button class="delete-tag" data-id="{{w._id}}" title="Borrar debilidad"><i
+								class="fas fa-trash"></i></button>
+					</li>
+					{{/each}}
+				</ul>
+				{{/if}}
+			</div>
+		</div>
+		{{/if}}
+		{{/each}}
+	</div>
+
+	<div class="moves">
+		<h4>Movimientos</h4>
+		<ul>
+			{{#each actor.moves as |moves k|}}
+			{{#each moves as |move id|}}
+			<li class="move move-roll" data-move="{{id}}" title="Tirar">
+				<div class="move-name">{{move.name}}</div>
+				<div class="move-description">
+					{{move.shortDescription}}
+				</div>
+			</li>
+			{{/each}}
+			{{/each}}
+		</ul>
+	</div>
+
+	<div class="conditions">
+		<div class="story-tags">
+			<header>
+				<h4>Tags de historia</h4>
+				<button class="add-tag" data-id="" data-type="story"><i class="fas fa-plus-square"
+						title="Añadir tag"></i></button>
+			</header>
+
+			{{#if (isEmpty actor.storyTags)}}
+			<p class="no-tags">No hay tags de historia</p>
+			{{else}}
+			<ul>
+				{{#each actor.storyTags as |p|}}
+				<li class="story-tag {{#if p.data.burned}}burned{{/if}}">
+					<div class="tag-name edit-item-text-field" data-prop="name" data-value="{{p.name}}"
+						data-id="{{p._id}}" title="Editar tag">
+						{{p.name}}</div>
+					<button class="tag-burn" data-id="{{p._id}}" data-prop="burned" title="Quemar tag"><i
+							class="fas fa-fire"></i></button>
+					<button class="delete-tag" data-id="{{p._id}}" title="Borrar tag"><i
+							class="fas fa-trash"></i></button>
+				</li>
+				{{/each}}
+			</ul>
+			{{/if}}
+		</div>
+
+		<div class="statuses">
+			<header>
+				<h4>Estados</h4>
+				<button class="add-status"><i class="fas fa-plus-square" title="Añadir estado"></i></button>
+			</header>
+
+			{{#if (isEmpty actor.statuses)}}
+			<p class="no-statuses">No hay estados</p>
+			{{else}}
+			<ul>
+				{{#each actor.statuses as |s|}}
+				<li class="status">
+					<header>
+						<input type="text" class="status-name" data-id="{{s._id}}" data-prop="name" value="{{s.name}}"
+							placeholder="Estado" />
+						<button class="delete-status" data-id="{{s._id}}" title="Borrar estado"><i
+								class="fas fa-trash"></i></button>
+					</header>
+					{{makeStatusTier s}}
+				</li>
+				{{/each}}
+			</ul>
+			{{/if}}
+		</div>
+	</div>
+</form>
